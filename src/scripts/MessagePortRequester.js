@@ -16,7 +16,9 @@ export default class MessagePortRequester {
 	async waitData({ responceHeader }) {
 		let result
 		let resultReceived
-		const resultPromise = new Promise((resolve) => (resultReceived = resolve))
+		const resultPromise = new Promise(
+			(resolve) => (resultReceived = resolve)
+		)
 
 		this.port.addEventListener('message', getMessage)
 

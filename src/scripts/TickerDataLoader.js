@@ -24,7 +24,8 @@ export default class TickerDataLoader {
 		})
 
 		if (compareData === null) {
-			const crossCurrencyData = await this.getCrossCurrencyData(tickerName)
+			const crossCurrencyData =
+				await this.getCrossCurrencyData(tickerName)
 			return crossCurrencyData
 		}
 

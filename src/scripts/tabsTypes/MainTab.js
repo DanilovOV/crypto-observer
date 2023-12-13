@@ -1,5 +1,5 @@
 import WsTickersUpdater from '../tickersUpdater/WsTickersUpdater'
-import FetchTickersUpdater from '../tickersUpdater/FetchTickersUpdater'
+// import FetchTickersUpdater from '../tickersUpdater/FetchTickersUpdater'
 import getCoinsData from '../getCoinsData'
 import { postMessage } from '../../api/tabsSyncWorkerApi'
 
@@ -29,7 +29,10 @@ export default class MainTab {
 	}
 
 	_postCoinsData() {
-		postMessage({ header: 'coinsData', message: { coinsData: this.coinsData } })
+		postMessage({
+			header: 'coinsData',
+			message: { coinsData: this.coinsData },
+		})
 	}
 
 	async getCoinsData() {
