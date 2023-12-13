@@ -1,8 +1,15 @@
 {
 	"trailingComma": "es5",
-	"tabWidth": 2,
 	"semi": false,
 	"singleQuote": true,
 	"singleAttributePerLine": true,
-	"experimentalTernaries": true
+	"experimentalTernaries": true,
+	"overrides": [
+		{
+			"files": "*.html",
+			"options": {
+				"singleAttributePerLine": false
+			}
+		}
+	]
 }
