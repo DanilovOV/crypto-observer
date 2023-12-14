@@ -1,18 +1,17 @@
 <template>
-	<Header />
-	<main-page />
+	<router-view></router-view>
 </template>
 
 <script>
 import MainPage from './views/MainPage.vue'
-import Header from './components/layout/Header.vue'
 
 export default {
 	components: {
 		MainPage,
-		Header,
 	},
 }
 </script>
 
-<style src="./app.css"></style>
+<style lang="scss">
+@import '@/styles/tailwind.scss';
+</style>
