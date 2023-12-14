@@ -12,6 +12,4 @@ export default {
 }
 </script>
 
-<style lang="scss">
-@import '@/styles/tailwind.scss';
-</style>
+<style lang="scss" src="@/styles/app.scss"></style>

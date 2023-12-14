@@ -1,8 +1,8 @@
 <template>
-	<header class="site-header">
+	<header class="site-header w-full">
 		<div class="logo">
 			<img
-				src="/path/to/your/logo.png"
+				src="/icons/favicon-48x48.png"
 				alt="Логотип"
 			/>
 		</div>
@@ -52,7 +52,7 @@ export default {
 }
 
 .logo img {
-	max-height: 50px; /* Регулируйте высоту логотипа по необходимости */
+	max-height: 50px;
 }
 
 .main-menu ul {
