@@ -87,6 +87,7 @@
 				<price-graph
 					ref="graph"
 					:ticker="selectedTicker"
+					@unselectTicker="this.selectedTicker = null"
 				/>
 			</template>
 		</Section>
@@ -207,7 +208,11 @@ export default {
 		},
 
 		setActiveTicker(tickerItem) {
-			this.selectedTicker = tickerItem
+			if (this.selectedTicker === tickerItem) {
+				this.selectedTicker = null
+			} else {
+				this.selectedTicker = tickerItem
+			}
 		},
 
 		pagePrev() {

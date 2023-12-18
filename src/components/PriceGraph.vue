@@ -21,6 +21,7 @@
 			<button
 				type="button"
 				class="absolute top-0 right-0"
+				@click="$emit('unselectTicker')"
 			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
@@ -55,6 +56,8 @@ export default {
 			required: true,
 		},
 	},
+
+	emits: ['unselectTicker'],
 
 	data() {
 		return {
@@ -110,13 +113,13 @@ export default {
 			const minGraphValue = Math.min(...this.graph)
 			const maxGraphValue = Math.max(...this.graph)
 
-			return minGraphValue === maxGraphValue
-				? this.graph.map(() => 50)
-				: this.graph.map(
+			return minGraphValue === maxGraphValue ?
+					this.graph.map(() => 50)
+				:	this.graph.map(
 						(price) =>
 							5 +
 							((price - minGraphValue) * 95) / (maxGraphValue - minGraphValue)
-				  )
+					)
 		},
 	},
 
@@ -124,6 +127,7 @@ export default {
 		ticker() {
 			this.graph = []
 			this.graphHistory = []
+			this.enabled = true
 		},
 
 		graphHistory() {
