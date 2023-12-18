@@ -13,15 +13,15 @@
 						name="wallet"
 						id="wallet"
 						v-model="newTickerName"
-						@keydown.enter="addTicker()"
-						@input="showAutocomplete(), (tickerExist = false)"
+						@keydown.enter="addTicker(autocompleteNamesArr[0])"
+						@input="handleInput(), (tickerExist = false)"
 						class="block w-full pr-10 border-gray-300 text-gray-900 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm rounded-md"
 						placeholder="Например DOGE"
 						autocomplete="off"
 					/>
 				</div>
 				<div
-					v-if="newTickerName"
+					v-if="newTickerName && autocompleteNamesArr.length"
 					class="flex bg-white shadow-md p-1 rounded-md shadow-md flex-wrap"
 				>
 					<span
@@ -78,16 +78,26 @@ export default {
 	},
 
 	methods: {
-		async addTicker() {
+		async addTicker(name) {
 			this.autocompleteNamesArr = []
-			this.$emit('add-ticker', this.newTickerName.toUpperCase())
+			this.showAutocomplete = false
+			this.$emit('add-ticker', name.toUpperCase())
 			this.newTickerName = ''
 		},
 
-		showAutocomplete() {
+		handleInput() {
 			this.autocompleteNamesArr = []
-			if (this.newTickerName === '') return
+			this.showAutocomplete = true
 
+			if (this.newTickerName === '') {
+				this.showAutocomplete = false
+				return
+			}
+
+			this.updateAutocompleteNames()
+		},
+
+		updateAutocompleteNames() {
 			for (let i = 0; i < this.coinsNames.length; i++) {
 				if (
 					this.coinsNames[i].symbol
