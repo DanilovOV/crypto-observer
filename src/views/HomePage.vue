@@ -16,10 +16,10 @@
 				:ticker-exist="tickerExist"
 			/>
 
-			<template v-if="tickersArr.length">
+			<template v-if="userCurrencies.сurrencies.size">
 				<hr class="w-full border-t border-gray-600 my-4" />
 
-				<template v-if="tickersArr.length > 1">
+				<template v-if="userCurrencies.сurrencies.size > 1">
 					<input
 						type="text"
 						placeholder="Имя тикера"
@@ -105,6 +105,8 @@ import {
 } from '@/api/sharedTickersApi'
 import { subscribeToTicker, unsubscribeToTicker } from '@/api/subscribeApi'
 
+import { useUserCurrenciesStore } from '@/stores/userCurrenciesStore.js'
+
 export default {
 	name: 'HomePage',
 
@@ -119,7 +121,6 @@ export default {
 		return {
 			tickerNameFilter: '',
 			selectedTicker: null,
-			tickersArr: [],
 			tickerExist: false,
 			page: 1,
 			tickersOnPage: 6,
@@ -142,7 +143,7 @@ export default {
 		}
 
 		const downloadStorageTickers = () => {
-			const tickersStorageData = localStorage.getItem('cryptonomicon-list')
+			const tickersStorageData = localStorage.getItem('user-currencies')
 			if (!tickersStorageData) return
 
 			const storageTickerNamesArr = JSON.parse(tickersStorageData)
@@ -165,24 +166,17 @@ export default {
 		tryAddTicker(newTickerName) {
 			if (newTickerName === '') return
 
-			if (this.hasTickerDuplicate(newTickerName)) this.tickerExist = true
+			if (this.userCurrencies.isContainsCurr(newTickerName))
+				this.tickerExist = true
 			else this.addTicker(newTickerName)
 		},
 
 		async addTicker(tickerName, isWorkerCallback) {
-			const newTickerName = tickerName.toUpperCase()
+			this.userCurrencies.addCurr(tickerName)
 
-			const newTicker = {
-				id: this.tickersArr.length + 1,
-				name: newTickerName,
-				value: '-',
-				isError: false,
-			}
-
-			this.tickersArr = [...this.tickersArr, newTicker]
 			subscribeToTicker(
-				newTickerName,
-				(newPrice) => this.updateTicker(newTickerName, newPrice),
+				tickerName.toUpperCase(),
+				(newPrice) => this.updateTicker(tickerName.toUpperCase(), newPrice),
 				isWorkerCallback
 			)
 
@@ -190,9 +184,7 @@ export default {
 		},
 
 		updateTicker(tickerName, price) {
-			this.tickersArr
-				.filter((ticker) => ticker.name === tickerName)
-				.forEach((targetTicker) => (targetTicker.value = price))
+			this.userCurrencies.updateCurrValue(tickerName, price)
 
 			if (this.selectedTicker && tickerName === this.selectedTicker.name) {
 				this.$refs.graph.addValue(this.selectedTicker.value)
@@ -200,7 +192,7 @@ export default {
 		},
 
 		deleteTicker(tickerName, isWorkerCallback) {
-			this.tickersArr = this.tickersArr.filter((t) => t.name != tickerName)
+			this.userCurrencies.deleteCurr(tickerName)
 
 			if (tickerName === this.selectedTicker?.name) {
 				this.selectedTicker = null
@@ -212,12 +204,6 @@ export default {
 		getFormattedPrice(price) {
 			if (price === '-') return price
 			return price > 1 ? price.toFixed(2) : price.toPrecision(2)
-		},
-
-		hasTickerDuplicate(name) {
-			return this.tickersArr.find(
-				(ticker) => ticker.name === name.toUpperCase()
-			)
 		},
 
 		setActiveTicker(tickerItem) {
@@ -234,6 +220,10 @@ export default {
 	},
 
 	computed: {
+		userCurrencies() {
+			return useUserCurrenciesStore()
+		},
+
 		pageStateOptions() {
 			return {
 				tickerNameFilter: this.tickerNameFilter,
@@ -242,9 +232,7 @@ export default {
 		},
 
 		filteredTickersArr() {
-			return this.tickersArr.filter((ticker) =>
-				ticker.name.toLowerCase().includes(this.tickerNameFilter.toLowerCase())
-			)
+			return this.userCurrencies.filterCurr(this.tickerNameFilter.toUpperCase())
 		},
 
 		hasNextPage() {
@@ -268,13 +256,6 @@ export default {
 	},
 
 	watch: {
-		tickersArr() {
-			localStorage.setItem(
-				'cryptonomicon-list',
-				JSON.stringify(this.tickersArr.map((tickerData) => tickerData.name))
-			)
-		},
-
 		paginatedTickersArr() {
 			if (this.paginatedTickersArr.length == 0 && this.page > 1) {
 				this.page--
