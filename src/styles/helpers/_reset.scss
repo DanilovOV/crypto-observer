@@ -1,0 +1,59 @@
+:focus,
+:active {
+	outline: none;
+}
+
+a,
+:visited {
+	text-decoration: none;
+    color: currentColor;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-size: inherit;
+	font-weight: inherit;
+}
+
+button {
+	cursor: pointer;
+	background: inherit;
+	font-family: inherit;
+}
+
+button,
+select,
+input,
+textarea {
+	border: none;
+	color: inherit;
+	font-size: inherit;
+	font-family: inherit;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+::before,
+::after {
+	box-sizing: border-box;
+}
+
+::placeholder {
+	color: inherit;
+}
+
+textarea {
+	resize: none;
+}
+
+li {
+	list-style: none;
+}
