@@ -12,7 +12,7 @@
 				<li><router-link to="/">Главная</router-link></li>
 				<li><router-link to="/about">О нас</router-link></li>
 				<li><router-link to="/services">Услуги</router-link></li>
-				<li><router-link to="/services">Услуги</router-link></li>
+				<li><router-link to="/home">Профиль</router-link></li>
 			</ul>
 		</nav>
 
