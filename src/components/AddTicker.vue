@@ -50,8 +50,8 @@
 </template>
 
 <script>
+import { getCoinsData } from '@/api/subscribeApi'
 import AddButton from './AddButton.vue'
-import { getCoinsData } from '../api/subscribeApi'
 
 export default {
 	components: {
