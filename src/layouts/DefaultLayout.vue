@@ -22,10 +22,6 @@ export default {
 		FooterLayout,
 		ContentLayout,
 	},
-
-	mounted() {
-		console.log('LayoutMounted')
-	},
 }
 </script>
 
