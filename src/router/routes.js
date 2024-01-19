@@ -10,11 +10,6 @@ export default [
 				component: () => import('@/views/HomePage.vue'),
 			},
 			{
-				path: 'temp',
-				name: 'Temp',
-				component: () => import('@/views/MainPage.vue'),
-			},
-			{
 				path: 'about',
 				name: 'About',
 				component: () => import('@/views/AboutPage.vue'),
