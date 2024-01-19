@@ -1,33 +1,25 @@
 <template>
-	<StandartPageLayout>
-		<Section>
-			<div class="about-us-container">
-				<section
-					v-for="(item, index) in aboutUsData"
-					:key="index"
-					class="about-us-item"
-				>
-					<div class="about-us-content">
-						<h2 class="about-us-title">{{ item.title }}</h2>
-						<img
-							:src="item.image"
-							alt="about-us-image"
-							class="about-us-image"
-						/>
-						<p class="about-us-text">{{ item.text }}</p>
-					</div>
-				</section>
+	<div class="about-us-container">
+		<section
+			v-for="(item, index) in aboutUsData"
+			:key="index"
+			class="about-us-item"
+		>
+			<div class="about-us-content">
+				<h2 class="about-us-title">{{ item.title }}</h2>
+				<img
+					:src="item.image"
+					alt="about-us-image"
+					class="about-us-image"
+				/>
+				<p class="about-us-text">{{ item.text }}</p>
 			</div>
-		</Section>
-	</StandartPageLayout>
+		</section>
+	</div>
 </template>
 
 <script>
-import StandartPageLayout from '@/components/layout/StandartPageLayout.vue'
-import Section from '@/components/layout/components/Section.vue'
-
 export default {
-	components: { StandartPageLayout, Section },
 	data() {
 		return {
 			aboutUsData: [

@@ -1,19 +1,24 @@
-const routes = [
-	{
-		path: '/temp',
-		name: 'Main',
-		component: () => import('@/views/MainPage.vue'),
-	},
+export default [
 	{
 		path: '/',
-		name: 'Home',
-		component: () => import('@/views/HomePage.vue'),
-	},
-	{
-		path: '/about',
-		name: 'About',
-		component: () => import('@/views/AboutPage.vue'),
+		name: 'Default',
+		component: () => import('@/layouts/DefaultLayout.vue'),
+		children: [
+			{
+				path: '',
+				name: 'Home',
+				component: () => import('@/views/HomePage.vue'),
+			},
+			{
+				path: 'temp',
+				name: 'Temp',
+				component: () => import('@/views/MainPage.vue'),
+			},
+			{
+				path: 'about',
+				name: 'About',
+				component: () => import('@/views/AboutPage.vue'),
+			},
+		],
 	},
 ]
-
-export default routes
