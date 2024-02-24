@@ -1,44 +1,14 @@
 <template>
-	<header class="site-header w-full">
-		<div class="logo">
+	<header class="site-header">
+		<div class="logo flex items-center">
 			<img
 				src="/icons/favicon-48x48.png"
 				alt="Логотип"
 			/>
-		</div>
-
-		<nav class="main-menu">
-			<ul>
-				<li><router-link to="/">Главная</router-link></li>
-				<li><router-link to="/about">О нас</router-link></li>
-			</ul>
-		</nav>
-
-		<div class="search-bar">
-			<input
-				type="text"
-				placeholder="Поиск"
-				v-model="searchQuery"
-			/>
-			<button @click="search">Искать</button>
+			<div>Crypto-Observer</div>
 		</div>
 	</header>
 </template>
-
-<script>
-export default {
-	data() {
-		return {
-			searchQuery: '',
-		}
-	},
-	methods: {
-		search() {
-			console.log('Выполняется поиск:', this.searchQuery)
-		},
-	},
-}
-</script>
 
 <style scoped>
 .site-header {
