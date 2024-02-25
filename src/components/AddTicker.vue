@@ -34,23 +34,35 @@
 				</div>
 			</div>
 		</div>
-		<AddButton
-			@click="addTicker(newTickerName)"
+
+		<AppButton
+			withIcon
 			type="button"
-			class="my-4"
-		/>
+			class="mt-2"
+			@click="addTicker(newTickerName)"
+		>
+			<AppIcon
+				fill
+				name="Add"
+				:width="24"
+				:height="24"
+			/>
+			Добавить
+		</AppButton>
 	</section>
 </template>
 
 <script>
 import { getCoinsData } from '@/api/subscribeApi'
-import AddButton from './AddButton.vue'
 import AppInput from './AppInput.vue'
+import AppButton from './global/AppButton.vue'
+import AppIcon from './global/AppIcon.vue'
 
 export default {
 	components: {
-		AddButton,
 		AppInput,
+		AppButton,
+		AppIcon,
 	},
 
 	props: {
