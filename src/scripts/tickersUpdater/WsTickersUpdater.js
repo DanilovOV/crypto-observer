@@ -14,10 +14,7 @@ export default class WsTickersUpdater {
 		this.socket = new WebSocket(
 			`wss://streamer.cryptocompare.com/v2?api_key=${this.apiKey}`
 		)
-		this.socket.addEventListener(
-			'message',
-			this._handleWsMessage.bind(this)
-		)
+		this.socket.addEventListener('message', this._handleWsMessage.bind(this))
 	}
 
 	subscribeToTicker = (tickerName, cb) => {
@@ -59,7 +56,7 @@ export default class WsTickersUpdater {
 			FROMSYMBOL: tickerName,
 			PRICE: price,
 		} = JSON.parse(e.data)
-		console.log(e)
+
 		if (type != this.aggregateIndex) return
 
 		const newData = { tickerName, price }
