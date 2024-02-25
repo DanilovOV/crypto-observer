@@ -1,28 +1,21 @@
+<!-- eslint-disable vue/no-mutating-props -->
 <template>
 	<section>
 		<div class="flex">
 			<div class="max-w-xs">
-				<label
-					for="wallet"
-					class="block text-sm font-medium text-gray-700"
-					>Тикер</label
-				>
-				<div class="mt-1 relative rounded-md shadow-md">
-					<input
-						type="text"
-						name="wallet"
-						id="wallet"
-						v-model="newTickerName"
-						@keydown.enter="addTicker(autocompleteNamesArr[0])"
-						@input="handleInput(), (tickerExist = false)"
-						class="block w-full pr-10 border-gray-300 text-gray-900 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm rounded-md"
-						placeholder="Например DOGE"
-						autocomplete="off"
-					/>
-				</div>
+				<AppInput
+					v-model="newTickerName"
+					label="Тикер"
+					placeholder="Например DOGE"
+					class="relative"
+					autocomplete="off"
+					@keydown.enter="addTicker(autocompleteNamesArr[0])"
+					@input="handleInput(), (tickerExist = false)"
+				/>
+
 				<div
 					v-if="newTickerName && autocompleteNamesArr.length"
-					class="flex bg-white shadow-md p-1 rounded-md shadow-md flex-wrap"
+					class="flex bg-white p-1 rounded-md shadow-md flex-wrap"
 				>
 					<span
 						class="inline-flex items-center px-2 m-1 rounded-md text-xs font-medium bg-gray-300 text-gray-800 cursor-pointer"
@@ -41,7 +34,7 @@
 				</div>
 			</div>
 		</div>
-		<add-button
+		<AddButton
 			@click="addTicker(newTickerName)"
 			type="button"
 			class="my-4"
@@ -52,10 +45,12 @@
 <script>
 import { getCoinsData } from '@/api/subscribeApi'
 import AddButton from './AddButton.vue'
+import AppInput from './AppInput.vue'
 
 export default {
 	components: {
 		AddButton,
+		AppInput,
 	},
 
 	props: {
