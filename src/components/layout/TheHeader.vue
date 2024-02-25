@@ -3,7 +3,7 @@
 		<div class="logo flex items-center">
 			<img
 				src="/icons/favicon-48x48.png"
-				alt="Логотип"
+				alt="Crypto observer"
 			/>
 			<div>Crypto-Observer</div>
 		</div>
