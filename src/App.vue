@@ -30,33 +30,16 @@
 				</template>
 
 				<dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
-					<div
-						class="bg-white overflow-hidden shadow rounded-lg border-purple-800 border-solid cursor-pointer"
+					<AppTicker
 						v-for="tickerItem of paginatedTickersArr"
 						:key="tickerItem.id"
+						:currency="tickerItem.name"
+						:price="getFormattedPrice(tickerItem.value)"
+						:isActive="selectedTicker === tickerItem"
+						:isError="tickerItem.isError"
 						@click="setActiveTicker(tickerItem)"
-						:class="{ 'border-4': selectedTicker === tickerItem }"
-					>
-						<div
-							class="px-4 py-5 sm:p-6 text-center"
-							:class="{ 'bg-red-100': tickerItem.isError }"
-						>
-							<dt class="text-sm font-medium text-gray-500 truncate">
-								{{ tickerItem.name }} - USD
-							</dt>
-							<dd class="mt-1 text-3xl font-semibold text-gray-900">
-								{{ getFormattedPrice(tickerItem.value) }}
-							</dd>
-						</div>
-						<div class="w-full border-t border-gray-200"></div>
-						<button
-							class="flex items-center justify-center font-medium w-full bg-gray-100 px-4 py-4 sm:px-6 text-md text-gray-500 hover:text-gray-600 hover:bg-gray-200 hover:opacity-20 transition-all focus:outline-none"
-							@click.stop="deleteTicker(tickerItem.name)"
-						>
-							<AppIcon fill name="Delete" class="mr-1" />
-							<span>Удалить</span>
-						</button>
-					</div>
+						@delete="deleteTicker(tickerItem.name)"
+					/>
 				</dl>
 
 				<PriceGraph
@@ -82,9 +65,9 @@ import {
 import { subscribeToTicker, unsubscribeToTicker } from '@/api/subscribeApi'
 import { useUserCurrenciesStore } from '@/stores/userCurrenciesStore.js'
 
-import AppIcon from './components/global/AppIcon.vue'
 import AppButton from './components/global/AppButton.vue'
 import AppInput from './components/global/AppInput.vue'
+import AppTicker from './components/AppTicker.vue'
 
 export default {
 	name: 'HomePage',
@@ -94,9 +77,9 @@ export default {
 		TheHeader,
 		FormAddTicker,
 		PriceGraph,
-		AppIcon,
 		AppButton,
 		AppInput,
+		AppTicker,
 	},
 
 	data() {
