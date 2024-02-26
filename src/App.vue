@@ -2,7 +2,7 @@
 	<TheWrapper>
 		<TheHeader />
 		<div class="p-8">
-			<AddTicker
+			<FormAddTicker
 				@add-ticker="tryAddTicker"
 				:ticker-exist="tickerExist"
 				@input="tickerExist = false"
@@ -73,7 +73,7 @@
 import TheWrapper from '@/components/layout/TheWrapper.vue'
 import TheHeader from '@/components/layout/TheHeader.vue'
 
-import AddTicker from '@/components/AddTicker.vue'
+import FormAddTicker from '@/components/FormAddTicker.vue'
 import PriceGraph from '@/components/PriceGraph.vue'
 import {
 	subscribeToAddTickers,
@@ -92,7 +92,7 @@ export default {
 	components: {
 		TheWrapper,
 		TheHeader,
-		AddTicker,
+		FormAddTicker,
 		PriceGraph,
 		AppIcon,
 		AppButton,
