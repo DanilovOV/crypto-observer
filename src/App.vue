@@ -53,21 +53,21 @@
 </template>
 
 <script>
+import { useUserCurrenciesStore } from '@/stores/userCurrenciesStore.js'
+
 import TheWrapper from '@/components/layout/TheWrapper.vue'
 import TheHeader from '@/components/layout/TheHeader.vue'
-
+import AppButton from './components/global/AppButton.vue'
+import AppInput from './components/global/AppInput.vue'
 import FormAddTicker from '@/components/FormAddTicker.vue'
+import AppTicker from './components/AppTicker.vue'
 import PriceGraph from '@/components/PriceGraph.vue'
+
 import {
 	subscribeToAddTickers,
 	subscribeToRemoveTickers,
 } from '@/api/sharedTickersApi'
 import { subscribeToTicker, unsubscribeToTicker } from '@/api/subscribeApi'
-import { useUserCurrenciesStore } from '@/stores/userCurrenciesStore.js'
-
-import AppButton from './components/global/AppButton.vue'
-import AppInput from './components/global/AppInput.vue'
-import AppTicker from './components/AppTicker.vue'
 
 export default {
 	name: 'HomePage',
@@ -107,7 +107,7 @@ export default {
 			}
 		}
 
-		const downloadStorageTickers = () => {
+		const loadStorageTickers = () => {
 			const tickersStorageData = localStorage.getItem('user-currencies')
 			if (!tickersStorageData) return
 
@@ -117,14 +117,14 @@ export default {
 			)
 		}
 
-		const subscribeToSharedTickers = () => {
+		const listenSharedTickerActions = () => {
 			subscribeToAddTickers(this.addTicker)
 			subscribeToRemoveTickers(this.deleteTicker)
 		}
 
-		downloadStorageTickers()
+		loadStorageTickers()
 		setStartUrlParams()
-		subscribeToSharedTickers()
+		listenSharedTickerActions()
 	},
 
 	methods: {
