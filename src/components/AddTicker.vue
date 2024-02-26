@@ -25,10 +25,7 @@
 						{{ autocompleteName }}
 					</span>
 				</div>
-				<div
-					v-if="tickerExist"
-					class="text-sm text-red-600"
-				>
+				<div v-if="tickerExist" class="text-sm text-red-600">
 					Такой тикер уже добавлен
 				</div>
 			</div>
@@ -40,12 +37,7 @@
 			class="mt-2"
 			@click="addTicker(newTickerName)"
 		>
-			<AppIcon
-				fill
-				name="Add"
-				:width="24"
-				:height="24"
-			/>
+			<AppIcon fill name="Add" :width="24" :height="24" />
 			Добавить
 		</AppButton>
 	</section>
@@ -53,7 +45,7 @@
 
 <script>
 import { getCoinsData } from '@/api/subscribeApi'
-import AppInput from './AppInput.vue'
+import AppInput from './global/AppInput.vue'
 import AppButton from './global/AppButton.vue'
 import AppIcon from './global/AppIcon.vue'
 
