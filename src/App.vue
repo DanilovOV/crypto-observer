@@ -222,7 +222,10 @@ export default {
 		},
 
 		hasNextPage() {
-			return Math.ceil(this.filteredTickersArr.length / this.tickersOnPage)
+			return (
+				this.page <
+				Math.ceil(this.filteredTickersArr.length / this.tickersOnPage)
+			)
 		},
 
 		paginatedTickersArr() {
