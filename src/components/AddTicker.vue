@@ -1,4 +1,3 @@
-<!-- eslint-disable vue/no-mutating-props -->
 <template>
 	<section>
 		<div class="flex">
@@ -10,7 +9,7 @@
 					class="relative"
 					autocomplete="off"
 					@keydown.enter="addTicker(autocompleteNamesArr[0])"
-					@input="handleInput(), (tickerExist = false)"
+					@input="handleInput()"
 				/>
 
 				<div
@@ -96,7 +95,7 @@ export default {
 			this.autocompleteNamesArr = []
 			this.showAutocomplete = true
 
-			if (this.newTickerName === '') {
+			if (!this.newTickerName) {
 				this.showAutocomplete = false
 				return
 			}

@@ -5,6 +5,7 @@
 			<AddTicker
 				@add-ticker="tryAddTicker"
 				:ticker-exist="tickerExist"
+				@input="tickerExist = false"
 			/>
 
 			<template v-if="userCurrencies.сurrencies.size">
@@ -155,7 +156,7 @@ export default {
 
 	methods: {
 		tryAddTicker(newTickerName) {
-			if (newTickerName === '') return
+			if (!newTickerName) return
 
 			if (this.userCurrencies.isContainsCurr(newTickerName))
 				this.tickerExist = true
