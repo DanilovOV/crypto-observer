@@ -15,6 +15,8 @@
 import defineModel from '@/mixins/defineModel'
 
 export default {
+	inheritAttrs: false,
+
 	props: {
 		class: {
 			type: String,
