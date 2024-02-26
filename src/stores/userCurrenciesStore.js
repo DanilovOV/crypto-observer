@@ -12,8 +12,7 @@ export const useUserCurrenciesStore = defineStore('userCurrenciesStore', () => {
 	}
 
 	const isContainsCurr = (name) => {
-		const upperName = name.toUpperCase()
-		return сurrencies.value.has(upperName)
+		return сurrencies.value.has(name.toUpperCase())
 	}
 
 	const addCurr = (currName) => {
